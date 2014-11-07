@@ -16,6 +16,8 @@ class SectionAdmin(admin.ModelAdmin):
 
 class AttendancesInline(admin.TabularInline):
     model = Attendance
+    extra = 0
+    can_delete = False
 
 class TraineeAdmin(admin.ModelAdmin):
     inlines = [AttendancesInline]
