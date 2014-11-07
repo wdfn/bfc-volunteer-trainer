@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Course(models.Model):
@@ -45,11 +46,6 @@ class Job(models.Model):
 
     # In Which Sections?
 
-class Timeslot(models.Model):
-    # Date
-    start_time = models.DateTimeField()
-
-    # In Which Sections?
 
 # I add the "null=True, blank=True" here in an attempt to allow the creation of sections without
 # explicitly created courses, skills, jobs, and timeslots. For example, when creating
@@ -68,12 +64,45 @@ class Section(models.Model):
     # List of jobs
     jobs = models.ManyToManyField(Job, null=True, blank=True)
 
-    # List of timeslots
-    timeslots = models.ManyToManyField(Timeslot, null=True, blank=True)
-
     # Make the string show up nicely
     def __str__(self):
         return self.name
 
-    # List of users - how do I plug in to django.contrib.auth?
+
+# List of users - how do I plug in to django.contrib.auth?
+class Trainee(models.Model):
+    user = models.OneToOneField(User)
+    section = models.ForeignKey(Section)
+
+    def __str__(self):
+        return self.user.first_name + " " + self.user.last_name
+
+# These should definitely be unique to a Section
+class Timeslot(models.Model):
+    # Starting Time and Ending Times
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+
+    # This is a user, not a trainee, in case a non trainee wants to sign up for a position
+    worker = models.ForeignKey(User)
+
+    # Which unique section is this in?
+    section = models.ForeignKey(Section)
+
+# This is the actual model determining whether a Trainee has attended a Course or not
+class Attendance(models.Model):
+    trainee = models.ForeignKey(Trainee)
+    course = models.ForeignKey(Course)
+    # Assume they haven't yet attended
+    attended = models.BooleanField(default=False)
+
+# This is the model containing the value of a skill
+class SkillCompletion(models.Model):
+    trainee = models.ForeignKey(Trainee)
+    skill = models.ForeignKey(Skill)
+
+    value = models.CharField(max_length=100)
+
+
+
 
