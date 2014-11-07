@@ -6,4 +6,5 @@ urlpatterns = patterns('',
     # url(r'^$', 'freeclinic.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^trainingtracker/', include('trainingtracker.urls', namespace='trainingtracker'))
 )
