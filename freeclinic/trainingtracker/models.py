@@ -89,17 +89,13 @@ class Trainee(models.Model):
         if Attendance.objects.filter(trainee=self).exists():
             for attendance in Attendance.objects.filter(trainee=self):
                 attendance.delete()
-
+        super(Trainee,self).save(*args,**kwargs)
         # Add the new ones
         for course in self.courses.all():
             if not Attendance.objects.filter(trainee=self,course=course).exists():
                 new_attendance = Attendance(trainee=self,course=course)
                 new_attendance.save()
-        super(Trainee,self).save(*args,**kwargs)
         
-
-
-
 
 # This is the actual model determining whether a Trainee has attended a Course or not
 class Attendance(models.Model):
