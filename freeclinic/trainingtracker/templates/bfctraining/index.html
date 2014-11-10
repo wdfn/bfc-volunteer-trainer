@@ -10,13 +10,35 @@
 
 <body>
 	<h1>Berkeley Free Clinic Volunteer Training</h1>
-	
+	<h3>You're in section: {{ curr_section.name }}</h3>
 	<div class="container-fluid">
 		<!-- Standard button -->
 		<button type="button" class="btn btn-default">Classes</button>
+		<table>
+			<tr>
+				<th>	</th>
+				{% for course in curr_courses.all %}
+				<th><a href = "{{ course.get_absolute_url }}"> {{ course.name }} </a></th>
+				{% endfor %}
+			</tr>
+			<tr>
+				<td>{{ curr_user.name }}</td>
+				{% for attendance in my_attendances %}
+				<td>{{ attendance.attended }}</td>
+				{% endfor %}
+			</tr>
+			{% for other, attendances in others.items %}
+			<tr>
+				<td>{{ other.name }}</td>
+				{% for attendance in attendances %}
+				<td>{{ attendance.attended }}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+		
 		<button type="button" class="btn btn-default">Skills</button>
 		<button type="button" class="btn btn-default">Shifts</button>
-		
 	</div>
 
 </body>

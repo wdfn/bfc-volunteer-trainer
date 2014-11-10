@@ -35,6 +35,9 @@ class Course(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/course/%i" % self.id
+
 # I add the "null=True, blank=True" here in an attempt to allow the creation of sections without
 # explicitly created courses, skills, jobs, and timeslots. For example, when creating
 # a new secion, we may not have timeslots properly added. You can read more about this
@@ -79,7 +82,7 @@ class Trainee(models.Model):
         return self.section.courses
 
     courses = property(_trainees_courses)
-    
+
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
 
@@ -95,7 +98,10 @@ class Trainee(models.Model):
             if not Attendance.objects.filter(trainee=self,course=course).exists():
                 new_attendance = Attendance(trainee=self,course=course)
                 new_attendance.save()
-        
+    
+    # We use the name in the models so we create a method to get it here
+    def name(self):
+        return str(self)
 
 # This is the actual model determining whether a Trainee has attended a Course or not
 class Attendance(models.Model):
