@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load staticfiles %}
-<head>
+{% extends "bfctraining/base.html" %}
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
-
-</head>
-
-<body>
-	<h1>Berkeley Free Clinic Volunteer Training</h1>
+{% block content %}
+<h1>Berkeley Free Clinic Volunteer Training</h1>
 	<h3>You're in section: {{ curr_section.name }}</h3>
 	<div class="container-fluid">
 		<!-- Standard button -->
@@ -40,7 +32,4 @@
 		<button type="button" class="btn btn-default">Skills</button>
 		<button type="button" class="btn btn-default">Shifts</button>
 	</div>
-
-</body>
-
-</html>
+{% endblock %}

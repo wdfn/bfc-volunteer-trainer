@@ -8,4 +8,6 @@ urlpatterns = patterns('',
     url(r'^', include('trainingtracker.urls', namespace='trainingtracker')),
     #url(r'^courses/', include('trainingtracker.urls', namespace='trainingtracker')),
     url(r'^admin/', include(admin.site.urls)),
+    # Need to include this so we can reverse the url in the login template
+    url('', include('django.contrib.auth.urls')),
 )
