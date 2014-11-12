@@ -1,0 +1,17 @@
+Django Authentication package documentation: https://docs.djangoproject.com/en/1.7/topics/auth/
+
+Where we use this in our project:
+	* trainingtracker/models.py: We import the user model. Now's a good time to explain a design decision I made. Users are created from the admin/users view in our admin site. They have a username, password, email, fname, etc. This is perfect for our needs - but I also wanted the User model to foreignkey to a Section. This is essential for our site, since the homepage displays all the classes, skills, etc in the trainee's section. So I created the trainee models which have a onetoone field to the User model. This basically means only one user can be mapped to one trainee and vice versa. This also means that all the fields of User that I listed above, a Trainee now also has. One side effect of this design is that users, when created, are not assigned a section and are thus NOT a trainee. We need to handle this case gracefully - hence the "noSectionFound" view. As soon as a User is assigned a section, which can be done in the admin/section view or the admin/Trainee view, the site behaves normally.
+	* trainingtracker/views.py: We use the @login_required decorator. contrib.auth automatically interprets this, detects if a user is logged in, and if not, redirects to the "login" page, which is defined in urls.py
+	* trainingtracker/urls.py: We import the built-in view so we don't have to remake it ourselves. However, the template is NOT built-in. It expects to find it at "registraion/login.html" but I figured our app is simple enough we didn't need more than one directory for our templates. So as I explain in my comment I override the template_name to look in the right place. 
+
+Django Admin package documentation: https://docs.djangoproject.com/en/1.7/ref/contrib/admin/
+
+Where we use this:
+	* trainingtracker/admin.py: Documentation for everything I do here can be found in the link above or in the Django tutorial, part 2.
+
+Django tempating system: https://docs.djangoproject.com/en/1.7/topics/templates/
+
+Where we use this:
+	* trainingtracker/templates/*: After reading though the above page, most of what I do should make sense. Basically, everything will "inherit" from base.html, meaning we don't have to rewrite things that are used across the app, like the retractable sidebar, for instance.
+	* views, since they specify which template to use. 

@@ -36,6 +36,7 @@
 
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
+    
 }
 
 #page-content-wrapper {
@@ -56,6 +57,13 @@
     text-align: center;
 }
 
+#wrapper.toggled #menu-toggle {
+    margin-left: 210px;
+    font-size: 20px;
+    width: 40px;
+    text-indent: -250px;
+    text-align: center;
+}
 /* Sidebar Styles */
 
 .sidebar-nav {
@@ -120,7 +128,8 @@
     }
 
     #wrapper.toggled #sidebar-wrapper {
-        width: 0;
+        width: 0px;
+        padding-left: 40px;
     }
 
     #page-content-wrapper {
@@ -130,5 +139,6 @@
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
+        margin-left: 40px;
     }
 }

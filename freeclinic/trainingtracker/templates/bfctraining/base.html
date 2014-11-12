@@ -24,6 +24,7 @@
                 <li class="sidebar-brand">
                     Hello, {{ curr_user.name }} 
                 </li>
+                <h3> Section: {{ curr_user.section }}</h3>
                 <h3> My Courses: </h3>
                 {% for course in curr_courses.all %}
 				<li>
@@ -35,7 +36,14 @@
         <script>
     	$("#menu-toggle").click(function(e) {
         	e.preventDefault();
-        	$("#wrapper").toggleClass("toggled");
+        	if (document.getElementById("wrapper").className == "") {
+        		document.getElementById("wrapper").className = "toggled";
+        		document.getElementById("menu-toggle").className = "glyphicon glyphicon-arrow-right";
+        	}
+        	else {
+        		document.getElementById("wrapper").className = "";
+        		//document.getElementById("menu-toggle").className = "glyphicon glyphicon-arrow-left";
+        	}
     	});
     	</script>
 		{% endblock %}
