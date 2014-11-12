@@ -7,13 +7,12 @@
 /* Toggle Styles */
 
 #wrapper {
-    padding-left: 0;
+    padding-left: 40px;
     /* padding-left: 50px; */ 
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    
+    transition: all 0.5s ease;   
 }
 
 #wrapper.toggled {
@@ -24,9 +23,10 @@
     z-index: 1000;
     position: fixed;
     left: 0px;
-    width: 0px;
+    width: 40px;
     height: 100%;
     margin-left: 0px;
+    padding-left: 40px;
     overflow-y: auto;
     background: #000;
     -webkit-transition: all 0.5s ease;
@@ -37,21 +37,20 @@
 
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
-    
+    padding-left: 0px;
 }
 
 #page-content-wrapper {
     width: 100%;
-    padding: 15px;
+    padding: 20px;
 }
 
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
-    margin-right: -250px;
 }
 
 #menu-toggle {
-    margin-left: 210px;
+    margin-left: -40px;
     font-size: 20px;
     width: 40px;
     text-indent: 0px;
@@ -59,11 +58,7 @@
 }
 
 #wrapper.toggled #menu-toggle {
-    margin-left: -40px;
-    font-size: 20px;
-    width: 40px;
-    text-indent: 0px;
-    text-align: center;
+    margin-left: 210px;
 }
 /* Sidebar Styles */
 
@@ -127,6 +122,7 @@
 
     #sidebar-wrapper {
         width: 250px;
+        padding-left: 0px;
     }
 
     #wrapper.toggled #sidebar-wrapper {
@@ -141,4 +137,17 @@
 
     #wrapper.toggled #page-content-wrapper {
         position: absolute;
+    }
+
+    #menu-toggle {
+        margin-left: 210px;
+        font-size: 20px;
+        width: 40px;
+        text-indent: 0px;
+        text-align: center;
+    }
+
+    #wrapper.toggled #menu-toggle {
+        margin-left: -40px;
+    }
 }
