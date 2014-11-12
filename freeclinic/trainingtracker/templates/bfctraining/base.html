@@ -19,7 +19,7 @@
 		<div id="sidebar-wrapper">
             <ul class="sidebar-nav">
             	<li class="close-button">
-            		<a href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-arrow-left"></span></a>
+            		<a href="#menu-toggle" id="menu-toggle"><span id="menu-toggle-icon" class="glyphicon glyphicon-arrow-left"></span></a>
             	</li>
                 <li class="sidebar-brand">
                     Hello, {{ curr_user.name }} 
@@ -38,11 +38,11 @@
         	e.preventDefault();
         	if (document.getElementById("wrapper").className == "") {
         		document.getElementById("wrapper").className = "toggled";
-        		document.getElementById("menu-toggle").className = "glyphicon glyphicon-arrow-right";
+        		document.getElementById("menu-toggle-icon").className = "glyphicon glyphicon-arrow-right";
         	}
         	else {
         		document.getElementById("wrapper").className = "";
-        		//document.getElementById("menu-toggle").className = "glyphicon glyphicon-arrow-left";
+        		document.getElementById("menu-toggle-icon").className = "glyphicon glyphicon-arrow-left";
         	}
     	});
     	</script>
