@@ -1,34 +1,43 @@
 {% extends "bfctraining/base.html" %}
 
 {% block content %}
-<h1>Berkeley Free Clinic Volunteer Training</h1>
-	<div class="container-fluid">
-		<!-- Standard button -->
-		<button type="button" class="btn btn-default">Classes</button>
-		<table>
-			<tr>
-				<th>	</th>
-				{% for course in curr_courses.all %}
-				<th><a href = "{{ course.get_absolute_url }}"> {{ course.name }} </a></th>
-				{% endfor %}
-			</tr>
-			<tr>
-				<td>{{ curr_user.name }}</td>
-				{% for attendance in my_attendances %}
-				<td>{{ attendance.attended }}</td>
-				{% endfor %}
-			</tr>
-			{% for other, attendances in others.items %}
-			<tr>
-				<td>{{ other.name }}</td>
-				{% for attendance in attendances %}
-				<td>{{ attendance.attended }}</td>
-				{% endfor %}
-			</tr>
-			{% endfor %}
-		</table>
-		
-		<button type="button" class="btn btn-default">Skills</button>
-		<button type="button" class="btn btn-default">Shifts</button>
+<div class="container-fluid">
+	<div class="page-header text-center">
+		<h1>Berkeley Free Clinic Volunteer Training</h1>
 	</div>
+	<h2><i>Course Attendance:</i></h2>
+	<table class="table table-striped" id="courses">
+		<tr>
+			<th>Name</th>
+			{% for course in curr_courses.all %}
+			<th><a href = "{{ course.get_absolute_url }}"> {{ course.name }} </a></th>
+			{% endfor %}
+		</tr>
+		<tr>
+			<td>{{ curr_user.name }}</td>
+			{% for attendance in my_attendances %}
+				{% if attendance.attended %}
+					<td><span class="glyphicon glyphicon-ok-sign green"></span></td>
+				{% else %}
+					<td><span class="glyphicon glyphicon-minus-sign red"></span></td>
+				{% endif %}
+			{% endfor %}
+		</tr>
+		{% for other, attendances in others.items %}
+		<tr>
+			<td>{{ other.name }}</td>
+			{% for attendance in attendances %}
+				{% if attendance.attended %}
+					<td><span class="glyphicon glyphicon-ok-sign green"></span></td>
+				{% else %}
+					<td><span class="glyphicon glyphicon-minus-sign red"></span></td>
+				{% endif %}
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
+	
+	<button type="button" class="btn btn-default">Skills</button>
+	<button type="button" class="btn btn-default">Shifts</button>
+</div>
 {% endblock %}

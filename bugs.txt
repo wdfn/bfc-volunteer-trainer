@@ -1,0 +1,25 @@
+This file contains bugs/features that need to be taken care of in the finished product. 
+
+If you notice a bug and don't want to work on it, post it here. Strikethrough finished bugs and add the date when it was completed and by whom.
+
+1) Collapsing sidebar makes tables extend beyond page. 
+	Priority: Low
+	Where: index.html
+
+2) We reuse code to get the currently logged in user, their section, and list of classes. We should find a way to not have to reuse this code.
+	Priority: Low
+	Where: views.py
+
+3) We need to actually implement the settings page. This will use a form. 
+	Priority: High
+	Where: views.py, forms.py
+
+4) We need to create a better login view.
+	Priority: High
+	Where: views.py, templates
+
+5) We need a logout button in the sidebar and an appropriate view for success.
+	Priority: Medium
+	Where: views.py, templates
+
+6) Allowing people to post html that shows up on the site is a HUGE security flaw. We need to come up with a way to embed the box files without allowing any user with access to admin to post html to the courses page. We can't just copy and paste the embed code for each new course. Right now, I require the person adding the course to manually copy and paste the id from box. This can be found in the "share" url generated from box. 

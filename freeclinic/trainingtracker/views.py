@@ -3,12 +3,11 @@ from django.http import HttpResponse
 from trainingtracker.models import Course, Trainee, Section, Attendance
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.utils.html import escape
 # Create your views here.
-
 
 # TODO:
 #    * Logout view
-
 
 # This is our landing page, after the user logs in. 
 @login_required
@@ -46,9 +45,39 @@ def index(request):
 
     return render(request, 'bfctraining/index.html', context)
 
+# What do we need here?
+#   Class name
+#   Class description
+#   Some unique box identifier
+#   Comments... do we display them publicly? 
 @login_required
 def course(request, course_identifier):
-    return HttpResponse("Hi, this is the course page for course " + str(course_identifier))
+    # This is essentially copy and pasted from above
+    curr_user = request.user
+    context = {}
+
+    # Check if user is a trainee, if not, we don't show any data. 
+    # Remember, to be in a section, you must be a trainee. 
+    try: 
+        curr_user = Trainee.objects.get(user=curr_user)
+    except Trainee.DoesNotExist:
+        return redirect('/nosectionfound')
+
+    context['curr_section'] = curr_user.section
+    context['curr_courses'] = curr_user.courses.order_by("id") 
+    context['curr_user'] = curr_user
+
+    # Actual content unique to courses
+    context['id'] = course_identifier
+    curr_course = Course.objects.get(id=course_identifier)
+    context['description'] = curr_course.description
+    context['name'] = curr_course.name
+    # We only display the embed from box if this string isn't empty
+    context['include_box'] = True if len(curr_course.box_embed_code) > 0 else False
+    # We need to HTML escape the embed code to prevent XSS.
+    context['embedcode'] = escape(curr_course.box_embed_code)
+
+    return render(request, 'bfctraining/course.html', context)
 
 @login_required
 def settings(request):

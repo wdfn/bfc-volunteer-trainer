@@ -27,7 +27,8 @@ class Course(models.Model):
     description = models.TextField()
 
     # Box URL
-
+    box_embed_code = models.CharField(max_length=100)
+    
     # Name
     name = models.CharField(max_length=50, unique=True)
 

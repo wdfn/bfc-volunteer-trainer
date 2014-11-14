@@ -1,0 +1,21 @@
+/* Personalized css */
+
+th {
+	border-bottom: 2px solid black;
+}
+
+td {
+	border-bottom: 1px solid black;
+}
+
+#courses tr:hover td{
+	background-color: #FFFF66;
+}
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}

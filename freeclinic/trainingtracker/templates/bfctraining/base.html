@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="{% static "css/bootstrap.css" %}" rel="stylesheet">
 	<link href="{% static "css/simple-sidebar.css" %}" rel="stylesheet">
+    <link href="{% static "css/styles.css" %}" rel="stylesheet">
 	<script src="{% static "js/jquery.js" %}"></script>
 	<script src="{% static "js/bootstrap.min.js" %}"></script>
 
@@ -24,8 +25,8 @@
                 <li class="sidebar-brand">
                     Hello, {{ curr_user.name }} 
                 </li>
-                <h3> Section: {{ curr_user.section }}</h3>
-                <h3> My Courses: </h3>
+                <li><h3> Section: {{ curr_user.section }}</h3></li>
+                <li><h3> My Courses: </h3></li>
                 {% for course in curr_courses.all %}
 				<li>
 					<a href = "{{ course.get_absolute_url }}"> {{ course.name }} </a>
