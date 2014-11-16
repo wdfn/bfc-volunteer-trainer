@@ -5,38 +5,64 @@
 	<div class="page-header text-center">
 		<h1>Berkeley Free Clinic Volunteer Training</h1>
 	</div>
-	<h2><i>Course Attendance:</i></h2>
-	<table class="table table-striped" id="courses">
-		<tr>
-			<th>Name</th>
-			{% for course in curr_courses.all %}
-			<th><a href = "{{ course.get_absolute_url }}"> {{ course.name }} </a></th>
+	<div class="tablebox">
+		<h2><i>Course Attendance:</i></h2>
+		<table class="table table-striped" id="courses">
+			<tr>
+				<th>Name</th>
+				{% for course in curr_courses.all %}
+				<th><a href = "{{ course.get_absolute_url }}"> {{ course.name }} </a></th>
+				{% endfor %}
+			</tr>
+			<tr>
+				<td>{{ curr_user.name }}</td>
+				{% for attendance in my_attendances %}
+					{% if attendance.attended %}
+						<td><span class="glyphicon glyphicon-ok-sign green"></span></td>
+					{% else %}
+						<td><span class="glyphicon glyphicon-minus-sign red"></span></td>
+					{% endif %}
+				{% endfor %}
+			</tr>
+			{% for other, checkoffs in others.items %}	<!-- checkoffs is the dictionary of the other trainee's attendances and skills-->
+			<tr>
+				<td>{{ other.name }}</td>
+				{% for attendance in checkoffs.attendances %}
+					{% if attendance.attended %}
+						<td><span class="glyphicon glyphicon-ok-sign green"></span></td>
+					{% else %}
+						<td><span class="glyphicon glyphicon-minus-sign red"></span></td>
+					{% endif %}
+				{% endfor %}
+			</tr>
 			{% endfor %}
-		</tr>
-		<tr>
-			<td>{{ curr_user.name }}</td>
-			{% for attendance in my_attendances %}
-				{% if attendance.attended %}
-					<td><span class="glyphicon glyphicon-ok-sign green"></span></td>
-				{% else %}
-					<td><span class="glyphicon glyphicon-minus-sign red"></span></td>
-				{% endif %}
+		</table>
+	</div>
+	<div class="tablebox">
+		<h2><i>Skill Completion:</i></h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Name</th>
+				{% for skill in curr_skills.all %}
+				<th> {{ skill.name }} </a></th>
+				{% endfor %}
+			</tr>
+			<tr>
+				<td>{{ curr_user.name }}</td>
+				{% for skill_comp in my_skill_comps %}
+					<td>{{ skill_comp.value }}</td>
+				{% endfor %}
+			</tr>
+			{% for other, checkoffs in others.items %}
+			<tr>
+				<td>{{ other.name }}</td>
+				{% for skill_comp in checkoffs.skill_comps %}
+					<td>{{ skill_comp.value }}</td>
+				{% endfor %}
+			</tr>
 			{% endfor %}
-		</tr>
-		{% for other, attendances in others.items %}
-		<tr>
-			<td>{{ other.name }}</td>
-			{% for attendance in attendances %}
-				{% if attendance.attended %}
-					<td><span class="glyphicon glyphicon-ok-sign green"></span></td>
-				{% else %}
-					<td><span class="glyphicon glyphicon-minus-sign red"></span></td>
-				{% endif %}
-			{% endfor %}
-		</tr>
-		{% endfor %}
-	</table>
-	
+		</table>
+	</div>
 	<button type="button" class="btn btn-default">Skills</button>
 	<button type="button" class="btn btn-default">Shifts</button>
 </div>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User, Group
-from trainingtracker.models import Attendance, Section, Course, Comment, Skill, Job, Timeslot, Trainee
+from trainingtracker.models import Attendance, Section, Course, Comment, Skill, SkillCompletion, Job, Timeslot, Trainee
 
 # Register your models here.
 class DatesInline(admin.StackedInline):
@@ -25,12 +25,19 @@ class TraineeAdmin(admin.ModelAdmin):
 class CourseAdmin(admin.ModelAdmin):
     inlines = [AttendancesInline]
 
+class SkillInline(admin.TabularInline):
+    model = SkillCompletion
+    extra = 3
+
+class SkillAdmin(admin.ModelAdmin):
+    inlines = [SkillInline]
+
 
 admin.site.register(Section, SectionAdmin)
 admin.site.register(Trainee, TraineeAdmin)
 admin.site.register(Course, CourseAdmin)
 #admin.site.register(Comment)
-admin.site.register(Skill)
+admin.site.register(Skill, SkillAdmin)
 admin.site.register(Job)
 admin.site.unregister(Group)
 #admin.site.register(Timeslot)

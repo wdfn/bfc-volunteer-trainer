@@ -25,8 +25,8 @@
                 <li class="sidebar-brand">
                     Hello, {{ curr_user.name }} 
                 </li>
-                <li><h3> Section: {{ curr_user.section }}</h3></li>
-                <li><h3> My Courses: </h3></li>
+                <li><h3 class="gray"> Section: {{ curr_user.section }}</h3></li>
+                <li><h3 class="gray"> My Courses: </h3></li>
                 {% for course in curr_courses.all %}
 				<li>
 					<a href = "{{ course.get_absolute_url }}"> {{ course.name }} </a>

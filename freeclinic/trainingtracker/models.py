@@ -27,7 +27,7 @@ class Course(models.Model):
     description = models.TextField()
 
     # Box URL
-    box_embed_code = models.CharField(max_length=100)
+    box_embed_code = models.CharField(max_length=100, null=True)
     
     # Name
     name = models.CharField(max_length=50, unique=True)
@@ -82,7 +82,11 @@ class Trainee(models.Model):
     def _trainees_courses(self):
         return self.section.courses
 
+    def _trainees_skills(self):
+        return self.section.skills
+
     courses = property(_trainees_courses)
+    skills = property(_trainees_skills)
 
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name

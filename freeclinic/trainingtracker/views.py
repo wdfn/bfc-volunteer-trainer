@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from trainingtracker.models import Course, Trainee, Section, Attendance
+from trainingtracker.models import Course, Trainee, Section, Attendance, SkillCompletion
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
@@ -26,22 +26,26 @@ def index(request):
     # curr_user is now a trainee. Let's get some information.
     context['curr_section'] = curr_user.section
     context['curr_courses'] = curr_user.courses.order_by("id") 
+    context['curr_skills'] = curr_user.skills.order_by("id") 
     context['curr_user'] = curr_user
     
     # we want all the other trainee's in this section, except for the current user.
     all_other_trainees = Trainee.objects.filter(section=context['curr_section']).exclude(user=curr_user.user)
     
-    # we create a dictionary mapping the other trainees to their attendance queryset
+    # we create a dictionary mapping the other trainees to their attendance and skill completion querysets
     others = {}
     for trainee in all_other_trainees:
-        others[trainee] = Attendance.objects.filter(trainee=trainee).order_by('course__id')
+        others[trainee] = {'attendances': Attendance.objects.filter(trainee=trainee).order_by('course__id'), 'skill_comps': SkillCompletion.objects.filter(trainee=trainee).order_by('skill__id')}
+
     context['others'] = others
     
     # current_user's attendances
     attendances = Attendance.objects.filter(trainee=curr_user).order_by('course__id')
+    skill_completions = SkillCompletion.objects.filter(trainee=curr_user).order_by('skill__id')
 
     # Add on the current user's attendances so they always show up first / somehow seperate
     context['my_attendances'] = attendances
+    context['my_skill_comps'] = skill_completions
 
     return render(request, 'bfctraining/index.html', context)
 

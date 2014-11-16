@@ -19,3 +19,13 @@ td {
 .red {
 	color: red;
 }
+
+.gray {
+	color: gray;
+}
+
+.tablebox {
+	background-color: #FFFFCC;
+	padding: 20px;
+	margin: 30px;
+}
