@@ -19,15 +19,17 @@ class AttendancesInline(admin.TabularInline):
     extra = 0
     can_delete = False
 
+class SkillInline(admin.TabularInline):
+    model = SkillCompletion
+    extra = 0
+    can_delete = False
+    required = False
+
 class TraineeAdmin(admin.ModelAdmin):
-    inlines = [AttendancesInline]
+    inlines = [AttendancesInline, SkillInline]
 
 class CourseAdmin(admin.ModelAdmin):
     inlines = [AttendancesInline]
-
-class SkillInline(admin.TabularInline):
-    model = SkillCompletion
-    extra = 3
 
 class SkillAdmin(admin.ModelAdmin):
     inlines = [SkillInline]
