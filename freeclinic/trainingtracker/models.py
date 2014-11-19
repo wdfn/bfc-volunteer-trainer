@@ -51,7 +51,7 @@ class Course(models.Model):
             for attendance in Attendance.objects.filter(section=self):
                 attendance.trainee.save()
     
-        super(Skill,self).save(*args,**kwargs)
+        super(Course,self).save(*args,**kwargs)
 
 # I add the "null=True, blank=True" here in an attempt to allow the creation of sections without
 # explicitly created courses, skills, jobs, and timeslots. For example, when creating
