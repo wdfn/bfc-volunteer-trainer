@@ -30,9 +30,22 @@ If you notice a bug and don't want to work on it, post it here. Strikethrough fi
 	Priority: High
 	Where: views.py, templates
 
-8) Add link back to home on sidebar, or make something link back to home.
-	Priority: Medium
-	Where: templates -> base.html
+8) Allowing people to post html that shows up on the site is a HUGE security flaw. We need to come up with a way to embed the box files without allowing any user with access to admin to post html to the courses page. We can't just copy and paste the embed code for each new course. Right now, I require the person adding the course to manually copy and paste the id from box. This can be found in the "share" url generated from box. 
+	Priority: Low
+	Where: models.py, templates
+
+8) Box embeds work on Safari but not Chrome (says "entering the cloud") :c
+	Priority: Medium/High
+	Where: templates, models.py
+
+10) High level overhaul to make site look pretty
+	Priority: Low
+	Where: templates
+
+11) Sidebar needs a link back to homepage, and to settings page (use gear glyphicon)
+	Priority: Low
+	Where: templates
+
 
 
 
