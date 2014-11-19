@@ -10,13 +10,15 @@ class Skill(models.Model):
     def __str__(self):
         return self.name
 
-    # Regenerate all skills for trainees
+    # Regenerate all skills for trainees - is this neccesary?
+    '''
     def save(self, *args, **kwargs):
         if SkillCompletion.objects.filter(skill=self).exists():
             for skillcompletion in SkillCompletion.objects.filter(section=self):
                 skillcompletion.trainee.save()
     
         super(Skill,self).save(*args,**kwargs)
+    '''
 
 class Job(models.Model):
     # Name
@@ -45,13 +47,15 @@ class Course(models.Model):
     def get_absolute_url(self):
         return "/course/%i" % self.id
 
-    # Regenerate all courses for trainees
+    # Regenerate all courses for trainees - Is this neccesary?
+    '''
     def save(self, *args, **kwargs):
         if Attendance.objects.filter(course=self).exists():
             for attendance in Attendance.objects.filter(section=self):
-                attendance.trainee.save()
-    
+                attendance.trainee.save()    
         super(Course,self).save(*args,**kwargs)
+    '''
+
 
 # I add the "null=True, blank=True" here in an attempt to allow the creation of sections without
 # explicitly created courses, skills, jobs, and timeslots. For example, when creating
@@ -80,7 +84,7 @@ class Section(models.Model):
         if Trainee.objects.filter(section=self).exists():
             for trainee in Trainee.objects.filter(section=self):
                 trainee.save()
-
+    
 # These should definitely be unique to a Section
 class Timeslot(models.Model):
     # Starting Time and Ending Times
@@ -114,6 +118,8 @@ class Trainee(models.Model):
 
     # We need to ensure, somehow, that the trainee has attendance objects for each course in it's section.
     def save(self, *args, **kwargs):
+        super(Trainee,self).save(*args,**kwargs)
+        # Add the new ones
         # Remove old attendances, saving previous attendances
         if Attendance.objects.filter(trainee=self).exists():
             for attendance in Attendance.objects.filter(trainee=self):
@@ -124,9 +130,6 @@ class Trainee(models.Model):
             for skillcompletion in SkillCompletion.objects.filter(trainee=self):
                 if skillcompletion.skill not in self.skills.all():
                     skillcompletion.delete()
-
-        super(Trainee,self).save(*args,**kwargs)
-        # Add the new ones
         
         for course in self.courses.all():
             if not Attendance.objects.filter(trainee=self,course=course).exists():
