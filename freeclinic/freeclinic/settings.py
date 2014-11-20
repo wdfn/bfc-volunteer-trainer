@@ -91,3 +91,4 @@ STATIC_URL = '/trainingtracker/static/'
 # Login URL
 
 LOGIN_URL = '/login'
+#LOGIN_REDIRECT_URL = '/index'

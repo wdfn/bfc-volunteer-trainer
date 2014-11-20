@@ -5,11 +5,48 @@ th {
 }
 
 td {
-	border-bottom: 1px solid black;
+	border-bottom: none;
 }
 
+/*login page css */
+#login_page_wrapper{
+    background-color: rgb(255, 255, 223);
+    padding: 80px;
+    width: 65%;
+    height: 550px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#loginbox {
+	background: rgb(255, 234, 196);
+	width: 400px;
+	height: 200px;
+	padding: 50px;
+	border: solid white 5px;
+}
+
+#bfc_title {
+	margin: 20px;
+}
+
+#login_button{
+	margin: 10px;
+}
+
+.decorative_line{
+	height:2px;
+}
+
+/*other css*/
 #courses tr:hover td{
 	background-color: #FFFF66;
+}
+
+.centered{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .green {
@@ -29,3 +66,4 @@ td {
 	padding: 20px;
 	margin: 30px;
 }
+

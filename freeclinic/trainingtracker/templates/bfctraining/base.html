@@ -15,8 +15,9 @@
 </head>
 
 <body>
-	<div id = "wrapper">
-		{% block sidebar %}
+	
+	{% block sidebar %}
+        <div id = "wrapper">
 		<div id="sidebar-wrapper">
             <ul class="sidebar-nav">
             	<li class="close-button">
@@ -47,8 +48,9 @@
         	}
     	});
     	</script>
-		{% endblock %}
 		<div id = "page-content-wrapper">
+    {% endblock %}
+
 		{% block content %}
 		{% endblock %}
 		</div>
