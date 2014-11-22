@@ -14,7 +14,7 @@ If you notice a bug and don't want to work on it, post it here. Strikethrough fi
 	Priority: High
 	Where: views.py, forms.py
 
-4) We need to create a better login view.
+4) DONE - We need to create a better login view.
 	Priority: High
 	Where: views.py, templates
 
