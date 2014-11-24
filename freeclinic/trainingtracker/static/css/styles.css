@@ -5,7 +5,7 @@ th {
 }
 
 td {
-	border-bottom: none;
+	border-bottom: 1px solid black;
 }
 
 /*login page css */

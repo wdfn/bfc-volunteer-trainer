@@ -11,14 +11,14 @@ class Skill(models.Model):
         return self.name
 
     # Regenerate all skills for trainees - is this neccesary?
-    '''
+    
     def save(self, *args, **kwargs):
         if SkillCompletion.objects.filter(skill=self).exists():
             for skillcompletion in SkillCompletion.objects.filter(section=self):
                 skillcompletion.trainee.save()
     
         super(Skill,self).save(*args,**kwargs)
-    '''
+    
 
 class Job(models.Model):
     # Name
@@ -48,13 +48,13 @@ class Course(models.Model):
         return "/course/%i" % self.id
 
     # Regenerate all courses for trainees - Is this neccesary?
-    '''
+    
     def save(self, *args, **kwargs):
         if Attendance.objects.filter(course=self).exists():
             for attendance in Attendance.objects.filter(section=self):
                 attendance.trainee.save()    
         super(Course,self).save(*args,**kwargs)
-    '''
+    
 
 
 # I add the "null=True, blank=True" here in an attempt to allow the creation of sections without
