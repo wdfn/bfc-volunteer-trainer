@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from trainingtracker.models import Course, Trainee, Section, Attendance, SkillCompletion, Timeslot, Shift
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.utils.html import escape
+
 
 # Create your views here.
 
@@ -82,7 +83,7 @@ def course(request, course_identifier):
 
     # Actual content unique to courses
     context['id'] = course_identifier
-    curr_course = Course.objects.get(id=course_identifier)
+    curr_course = get_object_or_404(Course, id=course_identifier)
     context['description'] = curr_course.description
     context['name'] = curr_course.name
     # We only display the embed from box if this string isn't empty
@@ -91,6 +92,27 @@ def course(request, course_identifier):
     context['embedcode'] = escape(curr_course.box_embed_code)
 
     return render(request, 'bfctraining/course.html', context)
+
+# We do some brief work (assign a shift to the current user) and then return a redirect to the homepage.
+@login_required
+def takeshift(request, shift_identifier):
+    curr_user = request.user
+    context = {}
+
+    try: 
+        curr_user = Trainee.objects.get(user=curr_user)
+    except Trainee.DoesNotExist:
+        return redirect('/nosectionfound')
+
+    curr_shift = get_object_or_404(Shift, id=shift_identifier)
+
+    if curr_shift.taken:
+        return redirect('/shiftalreadytaken')
+
+    curr_shift.trainee = curr_user
+    curr_shift.save()
+
+    return redirect('/index')
 
 @login_required
 def settings(request):

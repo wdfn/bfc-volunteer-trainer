@@ -43,6 +43,17 @@ td {
 	background-color: #FFFF66;
 }
 
+.hovered {
+	display: none;
+}
+.available:hover .unhovered {
+	display: none;
+}
+
+.available:hover .hovered {
+	display: block;
+}
+
 .centered{
 	text-align: center;
 	margin-left: auto;

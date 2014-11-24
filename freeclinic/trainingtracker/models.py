@@ -153,9 +153,6 @@ class Timeslot(models.Model):
                     new_shift.job = job
                     new_shift.save()
 
-
-
-
 class Shift(models.Model):
     timeslot = models.ForeignKey(Timeslot)
     job = models.ForeignKey(Job)

@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'^index/$', views.index, name='index'),
+    url(r'^takeshift/(?P<shift_identifier>\d+)$', views.takeshift, name='takeshift'),
     url(r'^course/(?P<course_identifier>\d+)$', views.course, name='course'),
     url(r'^settings/$', views.settings, name='settings'),
     url(r'^nosectionfound/$', views.noSectionFound, name='nosectionfound'),
