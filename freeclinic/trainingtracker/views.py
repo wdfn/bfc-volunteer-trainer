@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from trainingtracker.models import Course, Trainee, Section, Attendance, SkillCompletion
+from trainingtracker.models import Course, Trainee, Section, Attendance, SkillCompletion, Timeslot, Shift
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.utils.html import escape
@@ -27,7 +27,10 @@ def index(request):
     context['curr_section'] = curr_user.section
     context['curr_courses'] = curr_user.courses.order_by("id") 
     context['curr_skills'] = curr_user.skills.order_by("id") 
+    context['curr_jobs'] = curr_user.jobs.order_by("id")
+    context['curr_timeslots'] = Timeslot.objects.filter(section=curr_user.section)
     context['curr_user'] = curr_user
+
     
     # we want all the other trainee's in this section, except for the current user.
     all_other_trainees = Trainee.objects.filter(section=context['curr_section']).exclude(user=curr_user.user)
@@ -36,8 +39,12 @@ def index(request):
     others = {}
     for trainee in all_other_trainees:
         others[trainee] = {'attendances': Attendance.objects.filter(trainee=trainee).order_by('course__id'), 'skill_comps': SkillCompletion.objects.filter(trainee=trainee).order_by('skill__id')}
-
     context['others'] = others
+
+    shifts = {}
+    for timeslot in Timeslot.objects.filter(section=curr_user.section):
+        shifts[timeslot] = Shift.objects.filter(timeslot=timeslot)
+    context['curr_shifts'] = shifts
     
     # current_user's attendances
     attendances = Attendance.objects.filter(trainee=curr_user).order_by('course__id')
@@ -53,7 +60,7 @@ def index(request):
 #   Class name
 #   Class description
 #   Some unique box identifier
-#   Comments... do we display them publicly? 
+#   Comments... do we display them publicly? No, we will just send an email
 @login_required
 def course(request, course_identifier):
     # This is essentially copy and pasted from above

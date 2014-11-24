@@ -14,7 +14,7 @@ If you notice a bug and don't want to work on it, post it here. Strikethrough fi
 	Priority: High
 	Where: views.py, forms.py, templates
 
-4) We need to create a better login view.
+4) Good start, needs more work! We need to create a better login view.
 	Priority: High
 	Where: views.py, templates
 
@@ -22,7 +22,7 @@ If you notice a bug and don't want to work on it, post it here. Strikethrough fi
 	Priority: Medium
 	Where: views.py, templates
 
-6) We need to update the homepage with information about skills.
+6) DONE! We need to update the homepage with information about skills.
 	Priority: High
 	Where: views.py, templates
 
@@ -45,6 +45,10 @@ If you notice a bug and don't want to work on it, post it here. Strikethrough fi
 11) Sidebar needs a link back to homepage, and to settings page (use gear glyphicon)
 	Priority: Low
 	Where: templates
+
+12) We need to implement the email funcionality to remind folks about classes coming up. 
+	Priority: High
+	Where: ambiguous 
 
 
 

@@ -39,7 +39,7 @@ td {
 }
 
 /*other css*/
-#courses tr:hover td{
+.courses tr:hover td{
 	background-color: #FFFF66;
 }
 

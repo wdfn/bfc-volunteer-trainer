@@ -7,7 +7,7 @@
 	</div>
 	<div class="tablebox">
 		<h2><i>Course Attendance:</i></h2>
-		<table class="table table-striped" id="courses">
+		<table class="table table-striped courses">
 			<tr>
 				<th>Name</th>
 				{% for course in curr_courses.all %}
@@ -40,7 +40,7 @@
 	</div>
 	<div class="tablebox">
 		<h2><i>Skill Completion:</i></h2>
-		<table class="table table-striped">
+		<table class="table table-striped courses">
 			<tr>
 				<th>Name</th>
 				{% for skill in curr_skills.all %}
@@ -63,7 +63,31 @@
 			{% endfor %}
 		</table>
 	</div>
-	<button type="button" class="btn btn-default">Skills</button>
-	<button type="button" class="btn btn-default">Shifts</button>
+	<div class="tablebox">
+		<h2><i>Shift Scheduling:</i></h2>
+		<table class="table table-striped courses">
+			<tr>
+				<th>Timeslots</th>
+				{% for job in curr_jobs.all %}
+				<th> {{ job.name }} </th>
+				{% endfor %}
+			</tr>
+			{% for shifttimeslot, shifts in curr_shifts.items %}
+			<tr>
+				<td> {{ shifttimeslot.start_time }} - {{ shifttimeslot.end_time }} </td>
+				{% for shift in shifts %}
+				
+				{% if shift.taken %}
+				<td> {{ shift.trainee.name }} </td>
+				{% else %}
+				<td class=available> Available! </td>
+				{% endif %}
+				
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	
 </div>
 {% endblock %}
