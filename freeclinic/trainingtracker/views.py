@@ -3,7 +3,9 @@ from django.http import HttpResponse
 from trainingtracker.models import Course, Trainee, Section, Attendance, SkillCompletion
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.utils.html import escape
+
 # Create your views here.
 
 # TODO:
@@ -91,3 +93,7 @@ def settings(request):
 @login_required
 def noSectionFound(request):
     return HttpResponse("Place-holder for no section page.")
+
+def logout_view(request):
+    logout(request)
+    return render(request, "bfctraining/logout.html")

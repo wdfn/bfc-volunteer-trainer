@@ -15,8 +15,9 @@
 </head>
 
 <body>
-	<div id = "wrapper">
+	
 	{% block sidebar %}
+    <div id = "wrapper">
 		<div id="sidebar-wrapper">
             <ul class="sidebar-nav">
             	<li class="close-button">
@@ -24,6 +25,12 @@
             	</li>
                 <li class="sidebar-brand">
                     Hello, {{ curr_user.name }} 
+                </li>
+                <li>
+                    <ul>
+                        <li><a href="/logout">Log out</a></li>
+                        <li><a href="/index">Return to home page</a></li>
+                    </ul>
                 </li>
                 <li><h3 class="gray"> Section: {{ curr_user.section }}</h3></li>
                 <li><h3 class="gray"> My Courses: </h3></li>
@@ -47,12 +54,15 @@
         	}
     	});
     	</script>
-    {% endblock %}
+    
+        {% endblock %}
+
         <div id = "page-content-wrapper">
-		  {% block content %}
-		  {% endblock %}
-		</div>
-	</div>
+    	  {% block content %}
+    	  {% endblock %}
+    	</div>
+    </div> <!-- this end div corresponds to <div id="wrapper"> at the beginning of the sidebar block. It starts there and ends here so that the side bar shows up on pages iff it's needed-->
+	
 	
 </body>
 </html>
