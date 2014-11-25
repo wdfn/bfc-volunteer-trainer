@@ -23,21 +23,25 @@
             		<a href="#menu-toggle" id="menu-toggle"><span id="menu-toggle-icon" class="glyphicon glyphicon-arrow-left"></span></a>
             	</li>
                 <li class="sidebar-brand">
-                    {{ curr_user.name }}'s Training Portal
+                    Welcome, {{ curr_user.name }}
                 </li>
-                <li><h3 class="gray"> Section: {{ curr_user.section }}</h3></li>
                 <li>
                     <ul>
                         <li><a href="/logout">Log out</a></li>
                         <li><a href="/index">Return to home page</a></li>
+                        <li><a href="#">My Settings</a></li>
                     </ul>
                 </li>
-                <li><h3 class="sidebar-brand"> My Courses: </h3></li>
-                {% for course in curr_courses.all %}
-				<li>
-					<a href = "{{ course.get_absolute_url }}"> {{ course.name }} </a>
-				</li>
-				{% endfor %}
+                <li class="sidebar-brand"> <h3> Courses for {{ curr_user.section }}: </h3></li>
+                <li>
+                    <ul>
+                    {% for course in curr_courses.all %}
+				        <li>
+					       <a href = "{{ course.get_absolute_url }}"> {{ course.name }} </a>
+				        </li>
+				    {% endfor %}
+                    </ul>
+                </li>
             </ul>
         </div>
         <script>
