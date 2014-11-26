@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.utils.html import escape
 from django.views.generic.edit import View
+from django import forms
 # from django.views.generic.edit import UpdateView
 
 
@@ -130,6 +131,13 @@ def logout_view(request):
     logout(request)
     return render(request, "bfctraining/logout.html")
 
+class SettingsForm(forms.Form):
+    username = forms.CharField(label='Username: ', max_length = 100)
+    email = forms.CharField(label='Email: ', max_length = 100)
+    fname = forms.CharField(label='First name: ', max_length = 50)
+    lname = forms.CharField(label='Last name: ', max_length = 50)
+
+
 class Settings(View):
     # We need to display the current user's information. Could include first name, last name, email address
     # Form to change password, checkbox to receive email updates.
@@ -138,24 +146,38 @@ class Settings(View):
 
         context = {}
 
-        context['username'] = curr_user.username
-        context['fname'] = curr_user.firstname
-        context['lname'] = curr_user.lastname
-        context['email'] = curr_user.email
+        try: 
+            curr_user = Trainee.objects.get(user=curr_user)
+        except Trainee.DoesNotExist:
+            return redirect('/nosectionfound')
+
+        context['curr_section'] = curr_user.section
+        context['curr_courses'] = curr_user.courses.order_by("id") 
+        context['curr_user'] = curr_user
+
+        context['username'] = curr_user.user.username
+        context['fname'] = curr_user.user.first_name
+        context['lname'] = curr_user.user.last_name
+        context['email'] = curr_user.user.email
+
+        context['form'] = SettingsForm()
 
         return render(request, 'bfctraining/settings.html', context)
 
     # We need to make sure the form is valid
     # Update the current user's information accordingly
     def post(self, request, *args, **kwargs):
-        return render(request, 'bfctraining/settings.html', context)
+        form = SettingsForm(request.POST)
+        if form.is_valid():
+            return render(request, 'bfctraining/settings.html', context)
 
 
+'''
 class UserUpdate(UpdateView):
     model = User
     fields = ['first_name', 'last_name', 'username', 'password', 'email']
     template_name_suffix = '_update_form'
     success_url = '/index/'
-
+'''
 
 
