@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.utils.html import escape
+from django.views.generic.edit import UpdateView
 
 
 # Create your views here.
@@ -126,3 +127,12 @@ def noSectionFound(request):
 def logout_view(request):
     logout(request)
     return render(request, "bfctraining/logout.html")
+
+class UserUpdate(UpdateView):
+    model = User
+    fields = ['first_name', 'last_name', 'username', 'password', 'email']
+    template_name_suffix = '_update_form'
+    success_url = '/index/'
+
+
+

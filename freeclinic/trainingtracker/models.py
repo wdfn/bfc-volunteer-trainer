@@ -147,7 +147,6 @@ class Timeslot(models.Model):
         for timeslot in Timeslot.objects.filter(section=self):
             for job in self.section.jobs.all():
                 if not Shift.objects.filter(timeslot=timeslot, job=job).exists():
-                    print ("no " + str(timeslot) + " and " + str(job) + " job exist")
                     new_shift = Shift()
                     new_shift.timeslot = timeslot
                     new_shift.job = job
