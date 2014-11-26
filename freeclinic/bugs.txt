@@ -10,7 +10,7 @@ If you notice a bug and don't want to work on it, post it here. Strikethrough fi
 	Priority: Low
 	Where: views.py
 
-3) We need to actually implement the settings page. This will use a form. 
+3) DONE! We need to actually implement the settings page. This will use a form. 
 	Priority: High
 	Where: views.py, forms.py, templates
 
@@ -30,7 +30,7 @@ If you notice a bug and don't want to work on it, post it here. Strikethrough fi
 	Priority: High
 	Where: views.py, templates
 
-8) Allowing people to post html that shows up on the site is a HUGE security flaw. We need to come up with a way to embed the box files without allowing any user with access to admin to post html to the courses page. We can't just copy and paste the embed code for each new course. Right now, I require the person adding the course to manually copy and paste the id from box. This can be found in the "share" url generated from box. 
+8) DONE! Allowing people to post html that shows up on the site is a HUGE security flaw. We need to come up with a way to embed the box files without allowing any user with access to admin to post html to the courses page. We can't just copy and paste the embed code for each new course. Right now, I require the person adding the course to manually copy and paste the id from box. This can be found in the "share" url generated from box. 
 	Priority: Low
 	Where: models.py, templates
 
