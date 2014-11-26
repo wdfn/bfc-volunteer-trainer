@@ -5,7 +5,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.utils.html import escape
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import View
+# from django.views.generic.edit import UpdateView
+
 
 
 # Create your views here.
@@ -127,6 +129,27 @@ def noSectionFound(request):
 def logout_view(request):
     logout(request)
     return render(request, "bfctraining/logout.html")
+
+class Settings(View):
+    # We need to display the current user's information. Could include first name, last name, email address
+    # Form to change password, checkbox to receive email updates.
+    def get(self, request, *args, **kwargs):
+        curr_user = request.user
+
+        context = {}
+
+        context['username'] = curr_user.username
+        context['fname'] = curr_user.firstname
+        context['lname'] = curr_user.lastname
+        context['email'] = curr_user.email
+
+        return render(request, 'bfctraining/settings.html', context)
+
+    # We need to make sure the form is valid
+    # Update the current user's information accordingly
+    def post(self, request, *args, **kwargs):
+        return render(request, 'bfctraining/settings.html', context)
+
 
 class UserUpdate(UpdateView):
     model = User
