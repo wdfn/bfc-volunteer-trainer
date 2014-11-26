@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from trainingtracker import views
 from django.contrib.auth import views as auth_views
-from views import UserUpdate
+
 
 urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
@@ -13,5 +13,5 @@ urlpatterns = patterns('',
     # I rename the template so we don't need a basically empty 'registration' directory
     url(r'^login/$', auth_views.login, {'template_name': 'bfctraining/login.html'}),
     url(r'^logout/$', views.logout_view, name='logout'),
-    url(r'user/(?P<pk>[0-9]+)/$', UserUpdate.as_view(), name='user_update')
+    url(r'user/(?P<pk>[0-9]+)/$', views.UserUpdate.as_view(), name='user_update')
 )
