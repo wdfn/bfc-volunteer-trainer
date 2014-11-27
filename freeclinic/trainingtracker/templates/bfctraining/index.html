@@ -6,8 +6,8 @@
 		<h1>Berkeley Free Clinic Volunteer Training</h1>
 	</div>
 	<div class="tablebox">
-		<h2><i>Course Attendance:</i></h2>
-		<table class="table table-striped courses">
+		<div class="table_title">Course Attendance:</div>
+		<table class="table courses">
 			<tr>
 				<th>Name</th>
 				{% for course in curr_courses.all %}
@@ -39,8 +39,8 @@
 		</table>
 	</div>
 	<div class="tablebox">
-		<h2><i>Skill Completion:</i></h2>
-		<table class="table table-striped courses">
+		<div class="table_title">Skill Completion:</div>
+		<table class="table courses">
 			<tr>
 				<th>Name</th>
 				{% for skill in curr_skills.all %}
@@ -64,8 +64,8 @@
 		</table>
 	</div>
 	<div class="tablebox">
-		<h2><i>Shift Scheduling:</i></h2>
-		<table class="table table-striped courses">
+		<div class="table_title">Shift Scheduling:</div>
+		<table class="table courses">
 			<tr>
 				<th>Timeslots</th>
 				{% for job in curr_jobs.all %}

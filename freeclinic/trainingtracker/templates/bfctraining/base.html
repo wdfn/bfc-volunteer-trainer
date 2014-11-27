@@ -29,10 +29,10 @@
                     <ul>
                         <li><a href="/logout">Log out</a></li>
                         <li><a href="/index">Return to home page</a></li>
-                        <li><a href="#">My Settings</a></li>
+                        <li><a href="/settings">My Settings</a></li>
                     </ul>
                 </li>
-                <li class="sidebar-brand"> <h3> Courses for {{ curr_user.section }}: </h3></li>
+                <li class="sidebar-brand"> <h2> Courses for {{ curr_user.section }}: </h3></li>
                 <li>
                     <ul>
                     {% for course in curr_courses.all %}

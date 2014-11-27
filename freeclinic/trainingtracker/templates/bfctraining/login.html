@@ -1,36 +1,38 @@
 {% extends "bfctraining/base.html" %}
+{% load staticfiles %}
 
 {% block sidebar %} {% endblock %}
 {% block content %}
 
-<div id="login_page_wrapper" class="centered">
 
-	<div id="bfc_title">
-		<h1> BERKELEY FREE CLINIC </h1>
-		<p>Tracking your volunteer training progress.</p>
-	</div>
+<img id="bg_img" src="{% static "images/bfc_background.jpg" %}"/>
 
-	{% if form.errors %}
-	<p>Your username and password didn't match. Please try again.</p>
-	{% endif %}
+<div id="login_page_wrapper" class="centered"></div>
+<div id="bfc_title">
+	<h1> BERKELEY FREE CLINIC </h1>
+	<p>Tracking your volunteer training progress.</p>
+</div>
 
-	<div id="loginbox" class="centered">
-		<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
-			{% csrf_token %}
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
 
-				<div>
-					{{ form.username.label_tag }}
-					{{ form.username }}
-				</div>
-				<div>
-					{{ form.password.label_tag }}
-					{{ form.password }}
-				</div>
+<div id="loginbox" class="centered">
+	<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+		{% csrf_token %}
 
-			<button type="submit" value="login" class="btn btn-default" id="login_button" />Login</button>
-			<input type="hidden" name="next" value="/index" />
-		</form>
-	</div>
+			<div>
+				{{ form.username.label_tag }}
+				{{ form.username }}
+			</div>
+			<div>
+				{{ form.password.label_tag }}
+				{{ form.password }}
+			</div>
+
+		<button type="submit" value="login" class="btn btn-default" id="login_button" />Login</button>
+		<input type="hidden" name="next" value="/index" />
+	</form>
 
 </div>
 {% endblock %}

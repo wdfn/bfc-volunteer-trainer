@@ -2,18 +2,17 @@
 
 {% block content %}
 
-<div id="login_page_wrapper" class="centered">
 
-	<div id="bfc_title">
+
+	<div class="centered">
 		<h1> BERKELEY FREE CLINIC Settings </h1>
 		<p>Change user/account settings .</p>
 	</div>
-
 	{% if form.errors %}
 	<p>Invalid form .</p>
 	{% endif %}
 
-	<div id="loginbox" class="centered">
+	<div id="change_settings_box">
 		<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
 			{% csrf_token %}
 
@@ -43,5 +42,4 @@
 		</form>
 	</div>
 
-</div>
 {% endblock %}
