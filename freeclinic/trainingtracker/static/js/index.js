@@ -47,6 +47,7 @@ $(document).ready(function(){
 		data = $(this).attr("data").split(" ");
 		u = data[0];
 		c = data[1];
+
   		$.ajax(
   			{
   				type:"POST",
@@ -55,6 +56,7 @@ $(document).ready(function(){
   					user: u,
   					course: c
   				},
+
   				success:function(response){
   					if (response == "True") {
     					swap_icon(elem);
@@ -63,6 +65,5 @@ $(document).ready(function(){
   				}
   			}
   		);
-		//swap_icon(this);
 	});
 });
