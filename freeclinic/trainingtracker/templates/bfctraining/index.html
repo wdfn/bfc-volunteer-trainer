@@ -1,6 +1,7 @@
 {% extends "bfctraining/base.html" %}
 
 {% block content %}
+<script type="text/javascript" src="/trainingtracker/static/js/index.js"></script>
 <div class="container-fluid">
 	<div class="page-header text-center">
 		<h1>Berkeley Free Clinic Volunteer Training</h1>
@@ -11,16 +12,16 @@
 			<tr>
 				<th>Name</th>
 				{% for course in curr_courses.all %}
-				<th><a href = "{{ course.get_absolute_url }}"> {{ course.name }} </a></th>
+				<th><a href = "{{ course.get_absolute_url }}" id="course{{i}}"> {{ course.name }} </a></th>
 				{% endfor %}
 			</tr>
 			<tr>
 				<td>{{ curr_user.name }}</td>
 				{% for attendance in my_attendances %}
 					{% if attendance.attended %}
-						<td><span class="glyphicon glyphicon-ok-sign green"></span></td>
+						<td><span class="glyphicon glyphicon-ok-sign green attendance_icon" data="{{curr_user.id}} {{attendance.course.id}}"></span></td>
 					{% else %}
-						<td><span class="glyphicon glyphicon-minus-sign red"></span></td>
+						<td><span class="glyphicon glyphicon-minus-sign red attendance_icon" data="{{curr_user.id}} {{attendance.course.id}}"></span></td>
 					{% endif %}
 				{% endfor %}
 			</tr>
@@ -29,9 +30,9 @@
 				<td>{{ other.name }}</td>
 				{% for attendance in checkoffs.attendances %}
 					{% if attendance.attended %}
-						<td><span class="glyphicon glyphicon-ok-sign green"></span></td>
+						<td><span class="glyphicon glyphicon-ok-sign green attendance_icon" data="{{other.id}} {{attendance.course.id}}"></span></td>
 					{% else %}
-						<td><span class="glyphicon glyphicon-minus-sign red"></span></td>
+						<td><span class="glyphicon glyphicon-minus-sign red attendance_icon" data="{{other.id}} {{attendance.course.id}}"></span></td>
 					{% endif %}
 				{% endfor %}
 			</tr>
