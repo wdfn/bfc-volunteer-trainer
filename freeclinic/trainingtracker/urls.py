@@ -14,5 +14,5 @@ urlpatterns = patterns('',
     url(r'^login/$', auth_views.login, {'template_name': 'bfctraining/login.html'}),
     url(r'^logout/$', views.logout_view, name='logout'),
     # url(r'^user/(?P<pk>[0-9]+)/$', views.UserUpdate.as_view(), name='user_update')
-    url(r'^attendance/change/$', AttendanceController.change)
+    url(r'^attendance/change/$', AttendanceController.change),
 )

@@ -25,7 +25,7 @@
 					{% endif %}
 				{% endfor %}
 			</tr>
-			{% for other, checkoffs in others.items %}	<!-- checkoffs is the dictionary of the other trainee's attendances and skills-->
+			{% for other, checkoffs in others.items %}
 			<tr>
 				<td>{{ other.name }}</td>
 				{% for attendance in checkoffs.attendances %}

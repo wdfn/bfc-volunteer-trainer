@@ -27,7 +27,7 @@ td {
 #loginbox {
 	background: rgb(245, 163, 143);
 	width: 400px;
-	height: 200px;
+	height: 240px;
 	padding: 50px;
 	margin-top: 70px;
 	z-index: 10;
@@ -55,13 +55,12 @@ td {
 
 /*settings page css*/
 #change_settings_box {
-  width: -webkit-min-content;
-  width: -moz-min-content;
-  width: min-content;
+  width: 320px;
+  text-align: right;
   margin: 1em auto;
   background: #EFEFEF;
   border: 1px solid rgba(0,0,0,.1);
-  padding: 1em;
+  padding: 2em;
 }
 
 /*other css*/

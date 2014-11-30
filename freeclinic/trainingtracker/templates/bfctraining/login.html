@@ -13,11 +13,12 @@
 	<p>Tracking your volunteer training progress.</p>
 </div>
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+
 
 <div id="loginbox" class="centered">
+	{% if form.errors %}
+	<p>Your username and password didn't match. Please try again.</p>
+	{% endif %}
 	<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
 		{% csrf_token %}
 

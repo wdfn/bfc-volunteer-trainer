@@ -125,23 +125,15 @@ def settings(request):
 # This is the index for someone logged in without a Section (no tables, no classes, etc.)
 @login_required
 def noSectionFound(request):
-    return HttpResponse("Place-holder for no section page.")
+    return HttpResponse("Your account has not been assigned to a section. Please contact your staff and have them add you to a section.")
 
 def logout_view(request):
     logout(request)
     return render(request, "bfctraining/logout.html")
 
-class SettingsForm(forms.Form):
-    username = forms.CharField(label='Username: ', max_length = 100)
-    email = forms.CharField(label='Email: ', max_length = 100)
-    firstname = forms.CharField(label='First name: ', max_length = 50)
-    lastname = forms.CharField(label='Last name: ', max_length = 50)
-
 
 class Settings(View):
-    # We need to display the current user's information. Could include first name, last name, email address
-    # Form to change password, checkbox to receive email updates.
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         curr_user = request.user
 
         context = {}
@@ -151,6 +143,7 @@ class Settings(View):
         except Trainee.DoesNotExist:
             return redirect('/nosectionfound')
 
+    # We display the current user's information.
         context['curr_section'] = curr_user.section
         context['curr_courses'] = curr_user.courses.order_by("id") 
         context['curr_user'] = curr_user
@@ -160,24 +153,39 @@ class Settings(View):
         context['lname'] = curr_user.user.last_name
         context['email'] = curr_user.user.email
 
-        context['form'] = SettingsForm()
-
         return render(request, 'bfctraining/settings.html', context)
 
-    # We need to make sure the form is valid
-    # Update the current user's information accordingly
-    def post(self, request, *args, **kwargs):
-        form = SettingsForm(request.POST)
-        if form.is_valid():
-            return render(request, 'bfctraining/settings.html', context)
+    def post(self, request):
 
+        curr_user = request.user
 
-'''
-class UserUpdate(UpdateView):
-    model = User
-    fields = ['first_name', 'last_name', 'username', 'password', 'email']
-    template_name_suffix = '_update_form'
-    success_url = '/index/'
-'''
+        try: 
+            curr_user = Trainee.objects.get(user=curr_user)
+        except Trainee.DoesNotExist:
+            return redirect('/nosectionfound')
+
+        context = {}
+
+        new_username = request.POST['username']
+        new_firstname = request.POST['firstname']
+        new_lastname = request.POST['lastname']
+        new_email = request.POST['email']
+
+        curr_user.user.username = new_username
+        curr_user.user.first_name = new_firstname
+        curr_user.user.last_name = new_lastname
+        curr_user.user.email = new_email
+
+        curr_user.user.save()
+
+        context['curr_section'] = curr_user.section
+        context['curr_courses'] = curr_user.courses.order_by("id") 
+        context['curr_user'] = curr_user
+        context['username'] = curr_user.user.username
+        context['fname'] = curr_user.user.first_name
+        context['lname'] = curr_user.user.last_name
+        context['email'] = curr_user.user.email
+
+        return render(request, 'bfctraining/settings.html', context)
 
 
