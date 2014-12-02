@@ -81,9 +81,7 @@ def course(request, course_identifier):
     except Trainee.DoesNotExist:
         return redirect('/nosectionfound')
 
-    context['curr_section'] = curr_user.section
-    context['curr_courses'] = curr_user.courses.order_by("id") 
-    context['curr_user'] = curr_user
+    context = self.set_user_and_section_and_courses(curr_user, context)
 
     # Actual content unique to courses
     context['id'] = course_identifier
@@ -144,14 +142,8 @@ class Settings(View):
             return redirect('/nosectionfound')
 
     # We display the current user's information.
-        context['curr_section'] = curr_user.section
-        context['curr_courses'] = curr_user.courses.order_by("id") 
-        context['curr_user'] = curr_user
-
-        context['username'] = curr_user.user.username
-        context['fname'] = curr_user.user.first_name
-        context['lname'] = curr_user.user.last_name
-        context['email'] = curr_user.user.email
+        context = self.set_user_and_section_and_courses(curr_user, context)
+        context = self.set_username_and_fname_and_lname_and_email(self, curr_user, context)
 
         return render(request, 'bfctraining/settings.html', context)
 
@@ -178,14 +170,21 @@ class Settings(View):
 
         curr_user.user.save()
 
-        context['curr_section'] = curr_user.section
-        context['curr_courses'] = curr_user.courses.order_by("id") 
-        context['curr_user'] = curr_user
-        context['username'] = curr_user.user.username
-        context['fname'] = curr_user.user.first_name
-        context['lname'] = curr_user.user.last_name
-        context['email'] = curr_user.user.email
+        context = self.set_user_and_section_and_courses(curr_user, context)
+        context = self.set_username_and_fname_and_lname_and_email(self, curr_user, context)
 
         return render(request, 'bfctraining/settings.html', context)
 
+def set_user_and_section_and_courses(self, curr_user, context):
+    context['curr_section'] = curr_user.section
+    context['curr_courses'] = curr_user.courses.order_by("id") 
+    context['curr_user'] = curr_user
+    return context
+
+def set_username_and_fname_and_lname_and_email(self, curr_user, context):
+    context['username'] = curr_user.user.username
+    context['fname'] = curr_user.user.first_name
+    context['lname'] = curr_user.user.last_name
+    context['email'] = curr_user.user.email
+    return context
 

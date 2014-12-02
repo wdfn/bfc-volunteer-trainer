@@ -6,7 +6,7 @@ If you notice a bug and don't want to work on it, post it here. Strikethrough fi
 	Priority: Low
 	Where: index.html
 
-2) We reuse code to get the currently logged in user, their section, and list of classes. We should find a way to not have to reuse this code.
+2) DONE! We reuse code to get the currently logged in user, their section, and list of classes. We should find a way to not have to reuse this code.
 	Priority: Low
 	Where: views.py
 
