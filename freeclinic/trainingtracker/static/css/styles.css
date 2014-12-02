@@ -12,7 +12,7 @@ td {
 
 #login_page_wrapper{
 
-    background: black;
+    background: #297ACC;
     opacity:.5;
     padding: 80px;
     width: 50%;
@@ -25,7 +25,8 @@ td {
 }
 
 #loginbox {
-	background: rgb(245, 163, 143);
+	background: #5495D6;
+	opacity:.7;
 	width: 400px;
 	height: 240px;
 	padding: 50px;
