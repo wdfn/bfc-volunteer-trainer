@@ -17,19 +17,18 @@
 		Your first name: {{ fname }} <br>
 		Your last name: {{ lname }} <br>
 		Your current email: {{ email }} <br>
-		Your current courses: {% for course in curr_courses %} {{ course }}, {% endfor %} 
 	</div>
 	<br>
 	<br>
-	<p class="centered"><strong>Change your user/account settings. When submitting the form, please fill all the boxes.</strong></p>
+	<p class="centered"><strong>Change your user/account settings.</strong></p>
 	<div id="change_settings_box">
 
 		<form method="post" action="">
 			{% csrf_token %}
-			<label for="uname">Username: </label> <input type="text" name="username" id="uname" value=" Your desired username" /> <br>
-			<label for="fname">First Name: </label> <input type="text" name="firstname" id="fname" value=" Your desired first name" /> <br>
-			<label for="lname">Last Name: </label> <input type="text" name="lastname" id="lname" value=" Your desired last name" /> <br>
-			<label for="mail">Email: </label> <input type="text" name="email" id="mail" value=" Your new email" /> <br>
+			<label for="uname">Username: </label> <input type="text" name="username" id="uname"/> <br>
+			<label for="fname">First Name: </label> <input type="text" name="firstname" id="fname"/> <br>
+			<label for="lname">Last Name: </label> <input type="text" name="lastname" id="lname"/> <br>
+			<label for="mail">Email: </label> <input type="text" name="email" id="mail"/> <br>
 				<br>
 			<button type="submit" class="btn btn-default centered"/>Change</button>
 

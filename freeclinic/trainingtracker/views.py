@@ -178,15 +178,19 @@ class Settings(get_User):
         new_lastname = request.POST['lastname']
         new_email = request.POST['email']
 
-        curr_user.user.username = new_username
-        curr_user.user.first_name = new_firstname
-        curr_user.user.last_name = new_lastname
-        curr_user.user.email = new_email
+        if new_username != "":
+            curr_user.user.username = new_username
+        if new_firstname != "":
+            curr_user.user.first_name = new_firstname
+        if new_lastname != "":
+            curr_user.user.last_name = new_lastname
+        if new_email != "":
+            curr_user.user.email = new_email
 
         curr_user.user.save()
 
         context = self.set_user_and_section_and_courses(curr_user, context)
-        context = self.set_username_and_fname_and_lname_and_email(self, curr_user, context)
+        context = self.set_username_and_fname_and_lname_and_email(curr_user, context)
 
         return render(request, 'bfctraining/settings.html', context)
 
