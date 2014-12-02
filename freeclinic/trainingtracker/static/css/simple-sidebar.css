@@ -28,7 +28,7 @@
     margin-left: 0px;
     padding-left: 40px;
     overflow-y: auto;
-    background: #000;
+    background: #48D1CC;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -79,7 +79,7 @@
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #999999;
+    color: #fff;
 }
 
 .sidebar-nav li a:hover {
