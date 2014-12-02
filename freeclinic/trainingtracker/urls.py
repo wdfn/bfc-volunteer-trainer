@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from freeclinic.trainingtracker import views, AttendanceController
+from trainingtracker import views, AttendanceController
 from django.contrib.auth import views as auth_views
 
 
