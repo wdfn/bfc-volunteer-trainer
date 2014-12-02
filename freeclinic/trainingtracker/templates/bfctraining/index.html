@@ -82,7 +82,9 @@
 				<td class=available>
 					<span class=unhovered> {{ shift.trainee.name }} </span>
 					{% if shift.trainee = curr_user %}
-						<span class=hovered> <a href="takeshift/{{ shift.id }}"> Remove me from this slot? </a></span>
+						<span class=hovered> <a href="takeshift/{{ shift.id }}"> Remove me </a></span>
+					{% else %}
+						<span class=hovered> {{ shift.trainee.name }} </span>
 					{% endif %}
 				</td>
 
