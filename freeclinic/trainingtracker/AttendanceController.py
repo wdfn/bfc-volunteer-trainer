@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from trainingtracker.models import Attendance, Course, Trainee
+from freeclinic.trainingtracker.models import Attendance, Course, Trainee
 
 def change(request):
 	user_id = request.POST["user"]
