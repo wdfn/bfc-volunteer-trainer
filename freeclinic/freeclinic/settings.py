@@ -49,9 +49,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'freeclinic.urls'
+ROOT_URLCONF = 'urls'
 
-WSGI_APPLICATION = 'freeclinic.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
