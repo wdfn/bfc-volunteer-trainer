@@ -125,6 +125,9 @@ def takeshift(request, shift_identifier):
 
     curr_shift = get_object_or_404(Shift, id=shift_identifier)
 
+    if curr_shift.taken:
+        return redirect('/index')
+
     if curr_shift.taken and curr_user == curr_shift.trainee:
         curr_shift.trainee = None
         curr_shift.save()
