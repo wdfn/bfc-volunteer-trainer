@@ -79,7 +79,12 @@
 				{% for shift in shifts %}
 				
 				{% if shift.taken %}
-				<td> {{ shift.trainee.name }} </td>
+				<td class=available>
+					<span class=unhovered> {{ shift.trainee.name }} </span>
+					<span class=hovered> <a href="takeshift/{{ shift.id }}"> Remove
+					me from this slot? </a></span>
+				</td>
+
 				{% else %}
 				<td class=available>
 					<span class=unhovered>Open!</span>
