@@ -101,6 +101,8 @@ def course(request, course_identifier):
     # Actual content unique to courses
     context['id'] = course_identifier
     curr_course = get_object_or_404(Course, id=course_identifier)
+    context['start_time'] = curr_course.start_time
+    context['end_time'] = curr_course.end_time
     context['description'] = curr_course.description
     context['name'] = curr_course.name
     # We only display the embed from box if this string isn't empty

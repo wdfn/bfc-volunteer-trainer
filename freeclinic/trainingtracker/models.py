@@ -22,6 +22,9 @@ class Course(models.Model):
     # Course description
     description = models.TextField()
 
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+
     # Box URL
     box_embed_code = models.CharField(max_length=100, blank=True)
     
@@ -38,7 +41,7 @@ class Course(models.Model):
     # Regenerate all courses for trainees - Is this neccesary?
     def save(self, *args, **kwargs):
         if Attendance.objects.filter(course=self).exists():
-            for attendance in Attendance.objects.filter(section=self):
+            for attendance in Attendance.objects.filter(course=self):
                 attendance.trainee.save()    
         super(Course,self).save(*args,**kwargs)
 

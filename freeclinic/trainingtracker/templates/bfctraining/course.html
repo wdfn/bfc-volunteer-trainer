@@ -11,6 +11,9 @@
 	<div class="text-left">
 		<p>{{ description }}</p>
 	</div>
+	<div class="text-left">
+		<p>{{ start_time }} - {{ end_time }}</p>
+	</div>
 	{% if include_box %}
 		<div class="box_embed">
 			<iframe src="https://app.box.com/embed_widget/s/{{ embedcode }}?view=list&sort=name&direction=ASC&theme=blue" width="500" height="400" frameBorder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
