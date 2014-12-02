@@ -1,0 +1,38 @@
+{% extends "bfctraining/base.html" %}
+
+{% block content %}
+
+	<div class="centered">
+		<h1>Settings </h1>	
+		<br>
+	</div>
+
+	{% if form.errors %}
+	<p>Invalid form .</p>
+	{% endif %}
+
+	<div class="centered">
+		Your current username: {{ username }} <br>
+		Your current section: {{ curr_section }} <br>
+		Your first name: {{ fname }} <br>
+		Your last name: {{ lname }} <br>
+		Your current email: {{ email }} <br>
+	</div>
+	<br>
+	<br>
+	<p class="centered"><strong>Change your user/account settings.</strong></p>
+	<div id="change_settings_box">
+
+		<form method="post" action="">
+			{% csrf_token %}
+			<label for="uname">Username: </label> <input type="text" name="username" id="uname"/> <br>
+			<label for="fname">First Name: </label> <input type="text" name="firstname" id="fname"/> <br>
+			<label for="lname">Last Name: </label> <input type="text" name="lastname" id="lname"/> <br>
+			<label for="mail">Email: </label> <input type="text" name="email" id="mail"/> <br>
+				<br>
+			<button type="submit" class="btn btn-default centered"/>Change</button>
+
+		</form>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,116 @@
+/* Personalized css */
+
+th {
+	border-bottom: 2px solid black;
+}
+
+td {
+	border-bottom: 1px solid black;
+}
+
+/*login page css */
+
+#login_page_wrapper{
+
+    background: #297ACC;
+    opacity:.5;
+    padding: 80px;
+    width: 50%;
+    height: 550px;
+    margin: 0 auto;
+    margin-top: 100px;
+    z-index: -50;
+    position: relative;
+
+}
+
+#loginbox {
+	background: #48D1CC;
+	opacity:.9;
+	width: 400px;
+	height: 240px;
+	padding: 50px;
+	margin-top: 70px;
+	z-index: 10;
+}
+
+#bfc_title {
+	margin-top: -500px;
+	margin-right: auto;
+	text-align: center;
+	position: relative;
+	z-index: 100;
+	color: rgb(250, 238, 233);
+}
+
+#login_button{
+	margin: 10px;
+}
+
+#bg_img{
+	-webkit-filter: blur(10px);
+	z-index:-100;
+	position:absolute;
+	width: 100%;
+}
+
+/*settings page css*/
+#change_settings_box {
+  width: 320px;
+  text-align: right;
+  margin: 1em auto;
+  background: #EFEFEF;
+  border: 1px solid rgba(0,0,0,.1);
+  padding: 2em;
+}
+
+/*other css*/
+.courses tr:hover td{
+	background-color: #FFFF66;
+}
+
+.hovered {
+	display: none;
+}
+.available:hover .unhovered {
+	display: none;
+}
+
+.available:hover .hovered {
+	display: block;
+}
+
+.centered{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
+.gray {
+	color: gray;
+}
+
+.tablebox {
+	background-color: rgb(247, 247, 247);
+	border-radius: 5px;
+	box-shadow: 2px 2px 5px darkgrey;
+	padding: 20px;
+	margin: 30px;
+}
+
+.table_title {
+    background: black;
+    padding: 15px;
+    border-radius: 4px;
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+}

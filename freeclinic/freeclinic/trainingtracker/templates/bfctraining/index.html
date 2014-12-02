@@ -1,0 +1,97 @@
+{% extends "bfctraining/base.html" %}
+
+{% block content %}
+<script type="text/javascript" src="/trainingtracker/static/js/index.js"></script>
+<div class="container-fluid">
+	<div class="page-header text-center">
+		<h1>Berkeley Free Clinic Volunteer Training</h1>
+	</div>
+	<div class="tablebox">
+		<div class="table_title">Course Attendance:</div>
+		<table class="table courses">
+			<tr>
+				<th>Name</th>
+				{% for course in curr_courses.all %}
+				<th><a href = "{{ course.get_absolute_url }}" id="course{{i}}"> {{ course.name }} </a></th>
+				{% endfor %}
+			</tr>
+			<tr>
+				<td>{{ curr_user.name }}</td>
+				{% for attendance in my_attendances %}
+					{% if attendance.attended %}
+						<td><span class="glyphicon glyphicon-ok-sign green attendance_icon" data="{{curr_user.id}} {{attendance.course.id}}"></span></td>
+					{% else %}
+						<td><span class="glyphicon glyphicon-minus-sign red attendance_icon" data="{{curr_user.id}} {{attendance.course.id}}"></span></td>
+					{% endif %}
+				{% endfor %}
+			</tr>
+			{% for other, checkoffs in others.items %}
+			<tr>
+				<td>{{ other.name }}</td>
+				{% for attendance in checkoffs.attendances %}
+					{% if attendance.attended %}
+						<td><span class="glyphicon glyphicon-ok-sign green attendance_icon" data="{{other.id}} {{attendance.course.id}}"></span></td>
+					{% else %}
+						<td><span class="glyphicon glyphicon-minus-sign red attendance_icon" data="{{other.id}} {{attendance.course.id}}"></span></td>
+					{% endif %}
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<div class="tablebox">
+		<div class="table_title">Skill Completion:</div>
+		<table class="table courses">
+			<tr>
+				<th>Name</th>
+				{% for skill in curr_skills.all %}
+				<th> {{ skill.name }} </a></th>
+				{% endfor %}
+			</tr>
+			<tr>
+				<td>{{ curr_user.name }}</td>
+				{% for skill_comp in my_skill_comps %}
+					<td>{{ skill_comp.value }}</td>
+				{% endfor %}
+			</tr>
+			{% for other, checkoffs in others.items %}
+			<tr>
+				<td>{{ other.name }}</td>
+				{% for skill_comp in checkoffs.skill_comps %}
+					<td>{{ skill_comp.value }}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	<div class="tablebox">
+		<div class="table_title">Shift Scheduling:</div>
+		<table class="table courses">
+			<tr>
+				<th>Timeslots</th>
+				{% for job in curr_jobs.all %}
+				<th> {{ job.name }} </th>
+				{% endfor %}
+			</tr>
+			{% for shifttimeslot, shifts in curr_shifts.items %}
+			<tr>
+				<td> {{ shifttimeslot.start_time }} - {{ shifttimeslot.end_time }} </td>
+				{% for shift in shifts %}
+				
+				{% if shift.taken %}
+				<td> {{ shift.trainee.name }} </td>
+				{% else %}
+				<td class=available>
+					<span class=unhovered>Open!</span>
+					<span class=hovered> <a href="takeshift/{{ shift.id }}"> Take this slot </a></span>
+				</td>
+				{% endif %}
+				
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	
+</div>
+{% endblock %}
