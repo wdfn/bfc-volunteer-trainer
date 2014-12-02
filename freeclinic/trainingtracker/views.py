@@ -68,6 +68,21 @@ def index(request):
 #   Class description
 #   Some unique box identifier
 #   Comments... do we display them publicly? No, we will just send an email
+
+class get_User(View):
+    def set_user_and_section_and_courses(self, curr_user, context):
+        context['curr_section'] = curr_user.section
+        context['curr_courses'] = curr_user.courses.order_by("id") 
+        context['curr_user'] = curr_user
+        return context
+
+    def set_username_and_fname_and_lname_and_email(self, curr_user, context):
+        context['username'] = curr_user.user.username
+        context['fname'] = curr_user.user.first_name
+        context['lname'] = curr_user.user.last_name
+        context['email'] = curr_user.user.email
+        return context
+
 @login_required
 def course(request, course_identifier):
     # This is essentially copy and pasted from above
@@ -81,7 +96,7 @@ def course(request, course_identifier):
     except Trainee.DoesNotExist:
         return redirect('/nosectionfound')
 
-    context = self.set_user_and_section_and_courses(curr_user, context)
+    context = set_user_and_section_and_courses(curr_user, context)
 
     # Actual content unique to courses
     context['id'] = course_identifier
@@ -130,7 +145,7 @@ def logout_view(request):
     return render(request, "bfctraining/logout.html")
 
 
-class Settings(View):
+class Settings(get_User):
     def get(self, request):
         curr_user = request.user
 
@@ -175,16 +190,16 @@ class Settings(View):
 
         return render(request, 'bfctraining/settings.html', context)
 
-    def set_user_and_section_and_courses(self, curr_user, context):
-        context['curr_section'] = curr_user.section
-        context['curr_courses'] = curr_user.courses.order_by("id") 
-        context['curr_user'] = curr_user
-        return context
+def set_user_and_section_and_courses(curr_user, context):
+    context['curr_section'] = curr_user.section
+    context['curr_courses'] = curr_user.courses.order_by("id") 
+    context['curr_user'] = curr_user
+    return context
 
-    def set_username_and_fname_and_lname_and_email(self, curr_user, context):
-        context['username'] = curr_user.user.username
-        context['fname'] = curr_user.user.first_name
-        context['lname'] = curr_user.user.last_name
-        context['email'] = curr_user.user.email
-        return context
+def set_username_and_fname_and_lname_and_email(curr_user, context):
+    context['username'] = curr_user.user.username
+    context['fname'] = curr_user.user.first_name
+    context['lname'] = curr_user.user.last_name
+    context['email'] = curr_user.user.email
+    return context
 
