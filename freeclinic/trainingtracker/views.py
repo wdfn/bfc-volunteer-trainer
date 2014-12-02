@@ -10,6 +10,20 @@ from django import forms
 # from django.views.generic.edit import UpdateView
 
 
+# Helper functions
+def set_user_and_section_and_courses(curr_user, context):
+    context['curr_section'] = curr_user.section
+    context['curr_courses'] = curr_user.courses.order_by("id") 
+    context['curr_user'] = curr_user
+    return context
+
+def set_username_and_fname_and_lname_and_email(curr_user, context):
+    context['username'] = curr_user.user.username
+    context['fname'] = curr_user.user.first_name
+    context['lname'] = curr_user.user.last_name
+    context['email'] = curr_user.user.email
+    return context
+
 
 # Create your views here.
 
@@ -35,7 +49,7 @@ def index(request):
     context['curr_courses'] = curr_user.courses.order_by("id") 
     context['curr_skills'] = curr_user.skills.order_by("id") 
     context['curr_jobs'] = curr_user.jobs.order_by("id")
-    context['curr_timeslots'] = Timeslot.objects.filter(section=curr_user.section)
+    context['curr_timeslots'] = Timeslot.objects.filter(section=curr_user.section).order_by("id")
     context['curr_user'] = curr_user
 
     
@@ -49,8 +63,8 @@ def index(request):
     context['others'] = others
 
     shifts = {}
-    for timeslot in Timeslot.objects.filter(section=curr_user.section):
-        shifts[timeslot] = Shift.objects.filter(timeslot=timeslot)
+    for timeslot in Timeslot.objects.filter(section=curr_user.section).order_by("id"):
+        shifts[timeslot] = Shift.objects.filter(timeslot=timeslot).order_by('id')
     context['curr_shifts'] = shifts
     
     # current_user's attendances
@@ -68,20 +82,6 @@ def index(request):
 #   Class description
 #   Some unique box identifier
 #   Comments... do we display them publicly? No, we will just send an email
-
-class get_User(View):
-    def set_user_and_section_and_courses(self, curr_user, context):
-        context['curr_section'] = curr_user.section
-        context['curr_courses'] = curr_user.courses.order_by("id") 
-        context['curr_user'] = curr_user
-        return context
-
-    def set_username_and_fname_and_lname_and_email(self, curr_user, context):
-        context['username'] = curr_user.user.username
-        context['fname'] = curr_user.user.first_name
-        context['lname'] = curr_user.user.last_name
-        context['email'] = curr_user.user.email
-        return context
 
 @login_required
 def course(request, course_identifier):
@@ -150,7 +150,7 @@ def logout_view(request):
     return render(request, "bfctraining/logout.html")
 
 
-class Settings(get_User):
+class Settings(View):
     def get(self, request):
         curr_user = request.user
 
@@ -162,8 +162,8 @@ class Settings(get_User):
             return redirect('/nosectionfound')
 
     # We display the current user's information.
-        context = self.set_user_and_section_and_courses(curr_user, context)
-        context = self.set_username_and_fname_and_lname_and_email(curr_user, context)
+        context = set_user_and_section_and_courses(curr_user, context)
+        context = set_username_and_fname_and_lname_and_email(curr_user, context)
 
         return render(request, 'bfctraining/settings.html', context)
 
@@ -199,16 +199,4 @@ class Settings(get_User):
 
         return render(request, 'bfctraining/settings.html', context)
 
-def set_user_and_section_and_courses(curr_user, context):
-    context['curr_section'] = curr_user.section
-    context['curr_courses'] = curr_user.courses.order_by("id") 
-    context['curr_user'] = curr_user
-    return context
-
-def set_username_and_fname_and_lname_and_email(curr_user, context):
-    context['username'] = curr_user.user.username
-    context['fname'] = curr_user.user.first_name
-    context['lname'] = curr_user.user.last_name
-    context['email'] = curr_user.user.email
-    return context
 
