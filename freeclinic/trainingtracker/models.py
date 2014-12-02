@@ -144,7 +144,7 @@ class Timeslot(models.Model):
     def save(self, *args, **kwargs):
         super(Timeslot,self).save(*args,**kwargs)
         # make sure all shifts for all timeslots in section exist
-        for timeslot in Timeslot.objects.filter(section=self):
+        for timeslot in Timeslot.objects.filter(section=self.section):
             for job in self.section.jobs.all():
                 if not Shift.objects.filter(timeslot=timeslot, job=job).exists():
                     new_shift = Shift()
